@@ -39,7 +39,7 @@ var    temprt =0;
       });
     }
 
-    runApp(StoreProducts());
+    runApp(App());
 
     client.setProtocolV311();
     client.logging(on: false);
@@ -60,81 +60,17 @@ var    temprt =0;
 }
 
 // Products
-class app extends StatefulWidget {
-  const app({Key? key}) : super(key: key);
 
-  @override
-  State<app> createState() => _appState();
-}
-
-class _appState extends State<app> {
-  var cartItems = "Nike Shop";
-  var itemsList = [
-    {
-      "price": 20.22,
-      "image": "images/shoe1.jpeg",
-      "name": "Nike Air 2021",
-      "desc": "this is a running shoes"
-    },
-    {
-      "price": 30.22,
-      "image": "images/shoe2.jpeg",
-      "name": "Nike Air 2022",
-      "desc": "this is a running shoes"
-    },
-    {
-      "price": 50.22,
-      "image": "images/shoe1.jpeg",
-      "name": "Nike Air 2023",
-      "desc": "this is a running shoes"
-    },
-    {
-      "price": 30.22,
-      "image": "images/shoe2.jpeg",
-      "name": "Nike Air 2022",
-      "desc": "this is a running shoes"
-    },
-    {
-      "price": 50.22,
-      "image": "images/shoe1.jpeg",
-      "name": "Nike Air 2023",
-      "desc": "this is a running shoes"
-    },
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Nike Store"),
-          backgroundColor: Colors.black,
-        ),
-        body: ListView.builder(
-          itemCount: itemsList.length,
-          padding: EdgeInsets.all(12),
-          itemBuilder: (BuildContext context, int position) {
-            return Product(
-                name: "${itemsList[position]['name']}",
-                desc: "${itemsList[position]['desc']}",
-                price: double.parse("${itemsList[position]['price']}"),
-                image: "${itemsList[position]['image']}");
-          },
-        ),
-      ),
-    );
-  }
-}
 
 // StoreProducts : http
-class StoreProducts extends StatefulWidget {
-  const StoreProducts({Key? key}) : super(key: key);
+class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
-  State<StoreProducts> createState() => _StoreProductsState();
+  State<App> createState() => _AppState();
 }
 
-class _StoreProductsState extends State<StoreProducts> {
+class _AppState extends State<App> {
   publishToQueue(String text) async {
     try {
       print("status $client.instantiationCorrect");
@@ -183,12 +119,6 @@ class _StoreProductsState extends State<StoreProducts> {
       ),
     );
   }
-}
-
-Future<dynamic> _getStoreProducts() async {
-  String url = 'https://fakestoreapi.com/products';
-  http.Response response = await http.get(Uri.parse(url));
-  return json.decode(response.body);
 }
 
 class DoorLock extends StatefulWidget {
